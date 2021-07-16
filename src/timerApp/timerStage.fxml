@@ -1,29 +1,204 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.effect.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #000b1f;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #000b1f;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timerApp.timerStageController">
    <children>
-      <Text fill="#e48818" layoutX="372.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Timer App" textAlignment="CENTER" wrappingWidth="335.0712890625">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e48818" height="6.0" layoutX="28.0" layoutY="423.0" stroke="#e48818" strokeType="INSIDE" width="428.0" />
+      <Group>
+         <children>
+            <Group>
+               <children>
+                  <Circle fx:id="startStopWatchCircle" fill="#e48818" layoutX="184.0" layoutY="308.0" radius="97.0" stroke="#e48818" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Text fx:id="stopWatchTimerText" fill="WHITE" layoutX="-3.0" layoutY="307.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="375.0">
+                     <font>
+                        <Font name="Century Gothic" size="35.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Group>
+            <Group layoutY="-34.0">
+               <children>
+                  <Circle fx:id="stopStopWatchCircle" fill="#e48818" layoutX="340.0" layoutY="308.0" onMouseClicked="#onMouseStartStopStopWatchCircle" radius="43.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Text fx:id="resumeStopWatchText" fill="WHITE" layoutX="293.0" layoutY="316.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Resume" textAlignment="CENTER" visible="false" wrappingWidth="93.0396353475597">
+                     <font>
+                        <Font name="Century Gothic" size="19.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="stopStopWatchText" fill="WHITE" layoutX="305.0" layoutY="316.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Stop" textAlignment="CENTER" visible="false" wrappingWidth="70.0396353475597">
+                     <font>
+                        <Font name="Century Gothic" size="20.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="startStopWatchText" fill="WHITE" layoutX="317.0" layoutY="316.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Start" textAlignment="CENTER" wrappingWidth="46.0712890625">
+                     <font>
+                        <Font name="Century Gothic" size="20.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Group>
+            <Text fill="#e48818" layoutX="120.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stop watch" textAlignment="CENTER" wrappingWidth="244.0712890625">
+               <font>
+                  <Font name="Century Gothic" size="36.0" />
+               </font>
+            </Text>
+            <Group>
+               <children>
+                  <Circle fx:id="resetStopWatchCircle" fill="#e48818" layoutX="316.0" layoutY="374.0" onMouseClicked="#onResetStopWatchTimerCircle" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Text fx:id="startAgainStopWatchText" fill="WHITE" layoutX="281.0" layoutY="380.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Reset" textAlignment="CENTER" wrappingWidth="70.84865007936514">
+                     <font>
+                        <Font name="Century Gothic" size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Group>
+         </children>
+      </Group>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e48818" height="566.0" layoutX="475.0" layoutY="140.0" stroke="#e48818" strokeType="INSIDE" width="6.0" />
+      <Text fill="#e48818" layoutX="372.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Timer App" textAlignment="CENTER" wrappingWidth="335.0712890625">
          <font>
             <Font name="Century Gothic" size="66.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e48818" height="566.0" layoutX="537.0" layoutY="115.0" stroke="#e48818" strokeType="INSIDE" width="6.0" />
-      <Text fill="#e48818" layoutX="175.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stoper" textAlignment="CENTER" wrappingWidth="136.0712890625">
-         <font>
-            <Font name="Century Gothic" size="39.0" />
-         </font>
-      </Text>
+      <Group layoutX="5.0" layoutY="18.0">
+         <children>
+            <Group>
+               <children>
+                  <Text fill="WHITE" layoutX="67.0" layoutY="608.0" strokeType="OUTSIDE" strokeWidth="0.0" text="invalid/valid" textAlignment="CENTER" wrappingWidth="73.0">
+                     <font>
+                        <Font name="Century Gothic" size="12.0" />
+                     </font>
+                  </Text>
+                  <TextField alignment="CENTER" focusTraversable="false" layoutX="65.0" layoutY="560.0" prefHeight="32.0" prefWidth="39.0" promptText="00">
+                     <font>
+                        <Font name="Century Gothic" size="16.0" />
+                     </font>
+                  </TextField>
+                  <Text fill="WHITE" layoutX="60.0" layoutY="550.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select time" textAlignment="CENTER" wrappingWidth="104.0">
+                     <font>
+                        <Font name="Century Gothic" size="18.0" />
+                     </font>
+                  </Text>
+                  <TextField alignment="CENTER" focusTraversable="false" layoutX="116.0" layoutY="560.0" prefHeight="32.0" prefWidth="39.0" promptText="00">
+                     <font>
+                        <Font name="Century Gothic" size="16.0" />
+                     </font>
+                  </TextField>
+                  <Text fill="WHITE" layoutX="106.0" layoutY="583.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="6.0">
+                     <font>
+                        <Font name="Century Gothic" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Group>
+            <Text fill="#e48818" layoutX="94.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Countdown timer" textAlignment="CENTER" wrappingWidth="296.0712890625">
+               <font>
+                  <Font name="Century Gothic" size="29.0" />
+               </font>
+            </Text>
+            <Group>
+               <children>
+                  <Circle fill="#e48818" layoutX="204.0" layoutY="575.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Text fill="WHITE" layoutX="185.0" layoutY="582.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start" textAlignment="CENTER" wrappingWidth="39.0">
+                     <font>
+                        <Font name="Century Gothic" size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Group>
+            <Group>
+               <children>
+                  <Circle fill="#e48818" layoutX="327.0" layoutY="576.0" radius="75.0" stroke="#e48818" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Text fill="WHITE" layoutX="269.0" layoutY="587.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
+                     <font>
+                        <Font name="Century Gothic" size="30.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Group>
+         </children>
+      </Group>
+      <ImageView fitHeight="316.0" fitWidth="326.0" layoutX="629.0" layoutY="140.0">
+         <image>
+            <Image url="@../../../../Desktop/1626253707381099.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="101.0" fitWidth="104.0" layoutX="577.0" layoutY="532.0">
+         <image>
+            <Image url="@../../../../Desktop/1626253707381099.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="101.0" fitWidth="104.0" layoutX="740.0" layoutY="532.0">
+         <image>
+            <Image url="@../../../../Desktop/1626253707381099.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="101.0" fitWidth="104.0" layoutX="903.0" layoutY="532.0">
+         <image>
+            <Image url="@../../../../Desktop/1626253707381099.png" />
+         </image>
+      </ImageView>
+      <Group>
+         <children>
+            <Text fill="WHITE" layoutX="594.0" layoutY="655.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City" textAlignment="CENTER" wrappingWidth="70.0396353475597">
+               <font>
+                  <Font name="Century Gothic" size="22.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="598.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
+               <font>
+                  <Font name="Century Gothic" size="16.0" />
+               </font>
+            </Text>
+         </children>
+      </Group>
+      <Group>
+         <children>
+            <Text fill="WHITE" layoutX="761.0" layoutY="676.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
+               <font>
+                  <Font name="Century Gothic" size="16.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="757.0" layoutY="654.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City" textAlignment="CENTER" wrappingWidth="70.0396353475597">
+               <font>
+                  <Font name="Century Gothic" size="22.0" />
+               </font>
+            </Text>
+         </children>
+      </Group>
+      <Group>
+         <children>
+            <Text fill="WHITE" layoutX="924.0" layoutY="676.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
+               <font>
+                  <Font name="Century Gothic" size="16.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="920.0" layoutY="654.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City" textAlignment="CENTER" wrappingWidth="70.0396353475597">
+               <font>
+                  <Font name="Century Gothic" size="22.0" />
+               </font>
+            </Text>
+         </children>
+      </Group>
+      <Group>
+         <children>
+            <Text fill="WHITE" layoutX="724.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Warsaw" textAlignment="CENTER" wrappingWidth="136.0712890625">
+               <font>
+                  <Font name="Century Gothic" size="29.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="749.0" layoutY="496.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
+               <font>
+                  <Font name="Century Gothic" size="22.0" />
+               </font>
+            </Text>
+         </children>
+      </Group>
    </children>
 </Pane>
