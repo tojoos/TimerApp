@@ -1,19 +1,21 @@
 package timerApp;
 
-import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
 
-import javax.swing.*;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class timerStageController implements Initializable {
     private boolean isStopWatchOn = false;
     private Timer stopWatchTimer;
+    private TimerTask stopWatchTimerTask;
     private int stopWatchMillis;
+
 
     @FXML
     private Text startStopWatchText, stopWatchTimerText, stopStopWatchText, resumeStopWatchText;
@@ -39,22 +41,25 @@ public class timerStageController implements Initializable {
     }
 
     private void startStopWatchTimer() {
-        stopWatchTimer = new Timer(10, e -> {
-            stopWatchMillis += 10;
-            updateStopWatchText(stopWatchMillis);
-        });
-        stopWatchTimer.start();
+        stopWatchTimer = new Timer();
+        stopWatchTimerTask = new TimerTask() {
+            @Override
+            public void run() {
+                stopWatchMillis += 10;
+                updateStopWatchText(stopWatchMillis);
+            }
+        };
+        stopWatchTimer.scheduleAtFixedRate(stopWatchTimerTask, 10, 10);
     }
 
     public void stopStopWatchTimer() {
-        stopWatchTimer.stop();
+        stopWatchTimer.cancel();
     }
 
     @FXML
     private void onResetStopWatchTimerCircle() {
-        stopWatchTimer.restart();
-        stopWatchTimer.stop();
-        stopWatchTimerText.setText("00:00:00");
+        stopWatchTimer.cancel();
+        Platform.runLater(() -> stopWatchTimerText.setText("00:00:00"));
         resumeStopWatchText.setVisible(false);
         startStopWatchText.setVisible(true);
         stopStopWatchText.setVisible(false);
