@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.*?>
@@ -66,64 +67,6 @@
             <Font name="Century Gothic" size="66.0" />
          </font>
       </Text>
-      <Group layoutX="5.0" layoutY="18.0">
-         <children>
-            <Group>
-               <children>
-                  <Text fill="WHITE" layoutX="67.0" layoutY="608.0" strokeType="OUTSIDE" strokeWidth="0.0" text="invalid/valid" textAlignment="CENTER" wrappingWidth="73.0">
-                     <font>
-                        <Font name="Century Gothic" size="12.0" />
-                     </font>
-                  </Text>
-                  <TextField alignment="CENTER" focusTraversable="false" layoutX="65.0" layoutY="560.0" prefHeight="32.0" prefWidth="39.0" promptText="00">
-                     <font>
-                        <Font name="Century Gothic" size="16.0" />
-                     </font>
-                  </TextField>
-                  <Text fill="WHITE" layoutX="60.0" layoutY="550.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select time" textAlignment="CENTER" wrappingWidth="104.0">
-                     <font>
-                        <Font name="Century Gothic" size="18.0" />
-                     </font>
-                  </Text>
-                  <TextField alignment="CENTER" focusTraversable="false" layoutX="116.0" layoutY="560.0" prefHeight="32.0" prefWidth="39.0" promptText="00">
-                     <font>
-                        <Font name="Century Gothic" size="16.0" />
-                     </font>
-                  </TextField>
-                  <Text fill="WHITE" layoutX="106.0" layoutY="583.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="6.0">
-                     <font>
-                        <Font name="Century Gothic" size="18.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Group>
-            <Text fill="#e48818" layoutX="94.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Countdown timer" textAlignment="CENTER" wrappingWidth="296.0712890625">
-               <font>
-                  <Font name="Century Gothic" size="29.0" />
-               </font>
-            </Text>
-            <Group>
-               <children>
-                  <Circle fill="#e48818" layoutX="204.0" layoutY="575.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Text fill="WHITE" layoutX="185.0" layoutY="582.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start" textAlignment="CENTER" wrappingWidth="39.0">
-                     <font>
-                        <Font name="Century Gothic" size="16.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Group>
-            <Group>
-               <children>
-                  <Circle fill="#e48818" layoutX="327.0" layoutY="576.0" radius="75.0" stroke="#e48818" strokeType="INSIDE" strokeWidth="2.0" />
-                  <Text fill="WHITE" layoutX="269.0" layoutY="587.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
-                     <font>
-                        <Font name="Century Gothic" size="30.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Group>
-         </children>
-      </Group>
       <ImageView fitHeight="316.0" fitWidth="326.0" layoutX="629.0" layoutY="140.0">
          <image>
             <Image url="@../../../../Desktop/1626253707381099.png" />
@@ -144,6 +87,84 @@
             <Image url="@../../../../Desktop/1626253707381099.png" />
          </image>
       </ImageView>
+      <Group layoutX="5.0" layoutY="18.0">
+         <children>
+            <Group>
+               <children>
+                  <Text fx:id="validationCountDownText" fill="WHITE" layoutX="67.0" layoutY="608.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="103.0">
+                     <font>
+                        <Font name="Century Gothic" size="11.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="countDownMinutesField" alignment="CENTER" focusTraversable="false" layoutX="65.0" layoutY="560.0" prefHeight="32.0" prefWidth="39.0" promptText="00">
+                     <font>
+                        <Font name="Century Gothic" size="16.0" />
+                     </font>
+                  </TextField>
+                  <Text fill="WHITE" layoutX="60.0" layoutY="550.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select time" textAlignment="CENTER" wrappingWidth="104.0">
+                     <font>
+                        <Font name="Century Gothic" size="18.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="countDownSecondsField" alignment="CENTER" focusTraversable="false" layoutX="116.0" layoutY="560.0" prefHeight="32.0" prefWidth="39.0" promptText="00">
+                     <font>
+                        <Font name="Century Gothic" size="16.0" />
+                     </font>
+                  </TextField>
+                  <Text fill="WHITE" layoutX="106.0" layoutY="583.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="6.0">
+                     <font>
+                        <Font name="Century Gothic" size="18.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Group>
+            <Text fill="#e48818" layoutX="94.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Countdown timer" textAlignment="CENTER" wrappingWidth="296.0712890625">
+               <font>
+                  <Font name="Century Gothic" size="29.0" />
+               </font>
+            </Text>
+            <Group layoutX="22.0" layoutY="-43.0">
+               <children>
+                  <Circle fill="#e48818" layoutX="204.0" layoutY="575.0" onMouseClicked="#onMouseStartStopCountDownCircle" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Text fx:id="startCountDownText" fill="WHITE" layoutX="185.0" layoutY="581.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Start" textAlignment="CENTER" wrappingWidth="39.0">
+                     <font>
+                        <Font name="Century Gothic" size="16.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="stopCountDownText" fill="WHITE" layoutX="185.0" layoutY="581.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Stop" textAlignment="CENTER" visible="false" wrappingWidth="39.0">
+                     <font>
+                        <Font name="Century Gothic" size="16.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="resumeCountDownText" fill="WHITE" layoutX="168.0" layoutY="581.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Resume" textAlignment="CENTER" visible="false" wrappingWidth="73.0">
+                     <font>
+                        <Font name="Century Gothic" size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Group>
+            <Group layoutX="40.0" layoutY="-5.0">
+               <children>
+                  <Circle fill="#e48818" layoutX="313.0" layoutY="576.0" radius="75.0" stroke="#e48818" strokeType="INSIDE" strokeWidth="2.0" />
+                  <Text fx:id="countDownTimerText" fill="WHITE" layoutX="255.0" layoutY="587.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
+                     <font>
+                        <Font name="Century Gothic" size="30.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Group>
+            <Group layoutX="28.0" layoutY="100.0">
+               <children>
+                  <Circle fill="#e48818" layoutX="216.0" layoutY="526.0" onMouseClicked="#onMouseResetCountDownCircle" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Text fill="WHITE" layoutX="194.0" layoutY="532.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Reset" textAlignment="CENTER" wrappingWidth="45.0">
+                     <font>
+                        <Font name="Century Gothic" size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Group>
+         </children>
+      </Group>
       <Group>
          <children>
             <Text fill="WHITE" layoutX="594.0" layoutY="655.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City" textAlignment="CENTER" wrappingWidth="70.0396353475597">
