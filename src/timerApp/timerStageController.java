@@ -18,7 +18,7 @@ public class timerStageController implements Initializable {
     private boolean isStopWatchOn = false, isCountDownOn = false, isCountDownValueValid = false;
     private Timer stopWatchTimer, countDownTimer;
     private TimerTask stopWatchTimerTask, countDownTimerTask;
-    private int countDownMillis;
+    private int countDownMillis, stopWatchMillis;
 
     @FXML
     private Text startStopWatchText, stopWatchTimerText, stopStopWatchText, resumeStopWatchText,
@@ -33,13 +33,12 @@ public class timerStageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         countDownMillis = 0;
-        countDownSecondsField.textProperty().addListener(e -> {
-            isCountDownValueValid = countDownFieldsAreValid();
-        });
+        stopWatchMillis = 0;
+        countDownSecondsField.textProperty().addListener(e ->
+            isCountDownValueValid = countDownFieldsAreValid());
 
-        countDownMinutesField.textProperty().addListener(e -> {
-            isCountDownValueValid = countDownFieldsAreValid();
-        });
+        countDownMinutesField.textProperty().addListener(e ->
+            isCountDownValueValid = countDownFieldsAreValid());
     }
 
     @FXML
@@ -65,22 +64,24 @@ public class timerStageController implements Initializable {
 
     @FXML
     private void onMouseResetCountDownCircle() {
-        countDownTimer.cancel();
-        Platform.runLater(() -> countDownTimerText.setText("00:00:00"));
-        startCountDownText.setVisible(true);
-        stopCountDownText.setVisible(false);
-        resumeCountDownText.setVisible(false);
-        countDownMillis = 0;
-        countDownMinutesField.setText("");
-        countDownSecondsField.setText("");
-        countDownMinutesField.setDisable(false);
-        countDownSecondsField.setDisable(false);
-        countDownMinutesField.setEffect(null);
-        countDownSecondsField.setEffect(null);
-        validationCountDownText.setVisible(false);
+        if(countDownSecondsField.isDisabled()) {
+            countDownTimer.cancel();
+            Platform.runLater(() -> countDownTimerText.setText("00:00:00"));
+            startCountDownText.setVisible(true);
+            stopCountDownText.setVisible(false);
+            resumeCountDownText.setVisible(false);
+            countDownMillis = 0;
+            countDownMinutesField.setText("");
+            countDownSecondsField.setText("");
+            countDownMinutesField.setDisable(false);
+            countDownSecondsField.setDisable(false);
+            countDownMinutesField.setEffect(null);
+            countDownSecondsField.setEffect(null);
+            validationCountDownText.setVisible(false);
 
-        if(isCountDownOn) {
-            isCountDownOn = false;
+            if (isCountDownOn) {
+                isCountDownOn = false;
+            }
         }
     }
 
@@ -90,7 +91,7 @@ public class timerStageController implements Initializable {
             @Override
             public void run() {
                 if(countDownMillis > 0) {
-                    countDownMillis -= 100;
+                        countDownMillis -= 1000;
                 } else {
                     countDownMillis = 0;
                     stopCountDownTimer();
@@ -98,7 +99,7 @@ public class timerStageController implements Initializable {
                 updateCountDownText(countDownMillis);
             }
         };
-        countDownTimer.scheduleAtFixedRate(countDownTimerTask, 100, 100);
+        countDownTimer.scheduleAtFixedRate(countDownTimerTask, 0, 1000);
     }
 
     private void updateCountDownText(int countDownMillis) {
@@ -135,7 +136,7 @@ public class timerStageController implements Initializable {
            countDownSecondsField.getText().matches("([0-5][0-9])|(60)")) {
             countDownMinutesField.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.web("#27b500"),5,0.7,0,0));
             countDownSecondsField.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.web("#27b500"),5,0.7,0,0));
-            countDownMillis = Integer.parseInt(countDownMinutesField.getText())*60*1000 + Integer.parseInt(countDownSecondsField.getText())*1000;
+            countDownMillis = Integer.parseInt(countDownMinutesField.getText())*60*1000 + Integer.parseInt(countDownSecondsField.getText())*1000 + 1000;
             validationCountDownText.setVisible(false);
             return true;
         } else {
@@ -162,22 +163,6 @@ public class timerStageController implements Initializable {
             isStopWatchOn = !isStopWatchOn;
     }
 
-    private void startStopWatchTimer() {
-        stopWatchTimer = new Timer();
-        stopWatchTimerTask = new TimerTask() {
-            @Override
-            public void run() {
-                countDownMillis += 10;
-                updateStopWatchText(countDownMillis);
-            }
-        };
-        stopWatchTimer.scheduleAtFixedRate(stopWatchTimerTask, 10, 10);
-    }
-
-    public void stopStopWatchTimer() {
-        stopWatchTimer.cancel();
-    }
-
     @FXML
     private void onResetStopWatchTimerCircle() {
         stopWatchTimer.cancel();
@@ -185,10 +170,26 @@ public class timerStageController implements Initializable {
         resumeStopWatchText.setVisible(false);
         startStopWatchText.setVisible(true);
         stopStopWatchText.setVisible(false);
-        countDownMillis = 0;
+        stopWatchMillis = 0;
         if(isStopWatchOn) {
             isStopWatchOn = false;
         }
+    }
+
+    private void startStopWatchTimer() {
+        stopWatchTimer = new Timer();
+        stopWatchTimerTask = new TimerTask() {
+            @Override
+            public void run() {
+                stopWatchMillis += 10;
+                updateStopWatchText(stopWatchMillis);
+            }
+        };
+        stopWatchTimer.scheduleAtFixedRate(stopWatchTimerTask, 10, 10);
+    }
+
+    public void stopStopWatchTimer() {
+        stopWatchTimer.cancel();
     }
 
     private void updateStopWatchText(int stopWatchMillis) {

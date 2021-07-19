@@ -11,7 +11,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #000b1f;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timerApp.timerStageController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e48818" height="6.0" layoutX="28.0" layoutY="423.0" stroke="#e48818" strokeType="INSIDE" width="428.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e48818" height="6.0" layoutX="28.0" layoutY="435.0" stroke="#e48818" strokeType="INSIDE" width="428.0" />
       <Group>
          <children>
             <Group>
