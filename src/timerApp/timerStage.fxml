@@ -67,26 +67,6 @@
             <Font name="Century Gothic" size="66.0" />
          </font>
       </Text>
-      <ImageView fitHeight="316.0" fitWidth="326.0" layoutX="629.0" layoutY="140.0">
-         <image>
-            <Image url="@../../../../Desktop/1626253707381099.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="101.0" fitWidth="104.0" layoutX="577.0" layoutY="532.0">
-         <image>
-            <Image url="@../../../../Desktop/1626253707381099.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="101.0" fitWidth="104.0" layoutX="740.0" layoutY="532.0">
-         <image>
-            <Image url="@../../../../Desktop/1626253707381099.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="101.0" fitWidth="104.0" layoutX="903.0" layoutY="532.0">
-         <image>
-            <Image url="@../../../../Desktop/1626253707381099.png" />
-         </image>
-      </ImageView>
       <Group layoutX="5.0" layoutY="18.0">
          <children>
             <Group>
@@ -165,60 +145,156 @@
             </Group>
          </children>
       </Group>
-      <Group>
+      <Group layoutX="-17.0" layoutY="-2.0">
          <children>
-            <Text fill="WHITE" layoutX="594.0" layoutY="655.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City" textAlignment="CENTER" wrappingWidth="70.0396353475597">
+            <Text fill="WHITE" layoutX="594.0" layoutY="655.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tokyo" textAlignment="CENTER" wrappingWidth="70.0396353475597">
                <font>
                   <Font name="Century Gothic" size="22.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="598.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
+            <Text fx:id="tokyoTimeTxt" fill="WHITE" layoutX="598.0" layoutY="677.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
                <font>
                   <Font name="Century Gothic" size="16.0" />
                </font>
             </Text>
          </children>
       </Group>
-      <Group>
+      <Group layoutX="1.0" layoutY="-1.0">
          <children>
-            <Text fill="WHITE" layoutX="761.0" layoutY="676.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
+            <Text fx:id="new_yorkTimeTxt" fill="WHITE" layoutX="761.0" layoutY="676.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
                <font>
                   <Font name="Century Gothic" size="16.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="757.0" layoutY="654.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City" textAlignment="CENTER" wrappingWidth="70.0396353475597">
+            <Text fill="WHITE" layoutX="730.0" layoutY="654.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New York" textAlignment="CENTER" wrappingWidth="123.0396353475597">
                <font>
                   <Font name="Century Gothic" size="22.0" />
                </font>
             </Text>
          </children>
       </Group>
-      <Group>
+      <Group layoutX="20.0" layoutY="-2.0">
          <children>
-            <Text fill="WHITE" layoutX="924.0" layoutY="676.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
+            <Text fx:id="sydneyTimeTxt" fill="WHITE" layoutX="924.0" layoutY="676.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
                <font>
                   <Font name="Century Gothic" size="16.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="920.0" layoutY="654.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City" textAlignment="CENTER" wrappingWidth="70.0396353475597">
+            <Text fill="WHITE" layoutX="907.0" layoutY="654.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sydney" textAlignment="CENTER" wrappingWidth="95.0396353475597">
                <font>
                   <Font name="Century Gothic" size="22.0" />
                </font>
             </Text>
          </children>
       </Group>
-      <Group>
+      <Group layoutY="-35.0">
          <children>
             <Text fill="WHITE" layoutX="724.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Warsaw" textAlignment="CENTER" wrappingWidth="136.0712890625">
                <font>
                   <Font name="Century Gothic" size="29.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="749.0" layoutY="496.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
+            <Text fx:id="mainCityTimeTxt" fill="WHITE" layoutX="749.0" layoutY="496.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
                <font>
                   <Font name="Century Gothic" size="22.0" />
                </font>
             </Text>
+         </children>
+      </Group>
+      <Group layoutY="-3.0">
+         <children>
+            <ImageView fitHeight="305.0" fitWidth="313.0" layoutX="636.0" layoutY="121.0">
+               <image>
+                  <Image url="@graphics/clock_shield.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="longArrowMainCity" fitHeight="150.0" fitWidth="200.0" layoutX="788.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true" scaleY="1.2">
+               <image>
+                  <Image url="@graphics/clock_arrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="18.0" fitWidth="17.0" layoutX="784.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@graphics/clock_center.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="smallArrowMainCity" fitHeight="150.0" fitWidth="200.0" layoutX="788.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true" scaleY="0.7">
+               <image>
+                  <Image url="@graphics/clock_arrow.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group layoutX="-181.0" layoutY="290.0">
+         <children>
+            <ImageView fitHeight="168.0" fitWidth="172.0" layoutX="707.0" layoutY="181.0">
+               <image>
+                  <Image url="@graphics/clock_shield.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="longArrowTokyo" fitHeight="107.0" fitWidth="6.0" layoutX="790.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true" scaleY="1.2">
+               <image>
+                  <Image url="@graphics/clock_arrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="11.0" fitWidth="11.0" layoutX="787.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@graphics/clock_center.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="smallArrowTokyo" fitHeight="92.0" fitWidth="22.0" layoutX="790.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true" rotate="-0.0" scaleY="0.7">
+               <image>
+                  <Image url="@graphics/clock_arrow.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group layoutX="-1.0" layoutY="290.0">
+         <children>
+            <ImageView fitHeight="168.0" fitWidth="172.0" layoutX="707.0" layoutY="181.0">
+               <image>
+                  <Image url="@graphics/clock_shield.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="longArrowNew_York" fitHeight="107.0" fitWidth="6.0" layoutX="790.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true" scaleY="1.2">
+               <image>
+                  <Image url="@graphics/clock_arrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="11.0" fitWidth="11.0" layoutX="787.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@graphics/clock_center.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="smallArrowNew_York" fitHeight="92.0" fitWidth="22.0" layoutX="790.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true" rotate="-0.0" scaleY="0.7">
+               <image>
+                  <Image url="@graphics/clock_arrow.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group layoutX="182.0" layoutY="290.0">
+         <children>
+            <ImageView fitHeight="168.0" fitWidth="172.0" layoutX="707.0" layoutY="181.0">
+               <image>
+                  <Image url="@graphics/clock_shield.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="longArrowSydney" fitHeight="107.0" fitWidth="6.0" layoutX="790.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true" scaleY="1.2">
+               <image>
+                  <Image url="@graphics/clock_arrow.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="11.0" fitWidth="11.0" layoutX="787.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@graphics/clock_center.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="smallArrowSydney" fitHeight="92.0" fitWidth="22.0" layoutX="790.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true" rotate="-0.0" scaleY="0.7">
+               <image>
+                  <Image url="@graphics/clock_arrow.png" />
+               </image>
+            </ImageView>
          </children>
       </Group>
    </children>
