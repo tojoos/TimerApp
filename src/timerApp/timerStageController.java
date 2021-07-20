@@ -6,23 +6,33 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.time.Instant;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class timerStageController implements Initializable {
     private boolean isStopWatchOn = false, isCountDownOn = false, isCountDownValueValid = false;
-    private Timer stopWatchTimer, countDownTimer;
-    private TimerTask stopWatchTimerTask, countDownTimerTask;
+    private Timer stopWatchTimer, countDownTimer, clocksTimer;
+    private TimerTask stopWatchTimerTask, countDownTimerTask, clocksTimerTask;
     private int countDownMillis, stopWatchMillis;
 
     @FXML
+    private ImageView longArrowMainCity, smallArrowMainCity, longArrowTokyo, smallArrowTokyo,
+            longArrowNew_York, smallArrowNew_York, longArrowSydney, smallArrowSydney;
+
+    @FXML
     private Text startStopWatchText, stopWatchTimerText, stopStopWatchText, resumeStopWatchText,
-            countDownTimerText, startCountDownText, stopCountDownText, resumeCountDownText;
+            countDownTimerText, startCountDownText, stopCountDownText, resumeCountDownText,
+            mainCityTimeTxt, tokyoTimeTxt, new_yorkTimeTxt, sydneyTimeTxt;
 
     @FXML
     private TextField countDownMinutesField, countDownSecondsField;
@@ -32,6 +42,8 @@ public class timerStageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initializeClocks();
+
         countDownMillis = 0;
         stopWatchMillis = 0;
         countDownSecondsField.textProperty().addListener(e ->
@@ -39,6 +51,41 @@ public class timerStageController implements Initializable {
 
         countDownMinutesField.textProperty().addListener(e ->
             isCountDownValueValid = countDownFieldsAreValid());
+    }
+
+    private void initializeClocks() {
+        clocksTimer = new Timer();
+        clocksTimerTask = new TimerTask() {
+            @Override
+            public void run() {
+                LocalTime WarsawTime = ZonedDateTime.ofInstant(Instant.now(), ZoneId.of("Europe/Warsaw")).toLocalTime();
+                LocalTime TokyoTime = ZonedDateTime.ofInstant(Instant.now(), ZoneId.of("Asia/Tokyo")).toLocalTime();
+                LocalTime New_YorkTime = ZonedDateTime.ofInstant(Instant.now(), ZoneId.of("America/New_York")).toLocalTime();
+                LocalTime SydneyTime = ZonedDateTime.ofInstant(Instant.now(), ZoneId.of("Australia/Sydney")).toLocalTime();
+                mainCityTimeTxt.setText(WarsawTime.toString().substring(0,8));
+                tokyoTimeTxt.setText(TokyoTime.toString().substring(0,8));
+                new_yorkTimeTxt.setText(New_YorkTime.toString().substring(0,8));
+                sydneyTimeTxt.setText(SydneyTime.toString().substring(0,8));
+                synchronizeClock(WarsawTime, longArrowMainCity, smallArrowMainCity);
+                synchronizeClock(TokyoTime, longArrowTokyo, smallArrowTokyo);
+                synchronizeClock(New_YorkTime, longArrowNew_York, smallArrowNew_York);
+                synchronizeClock(SydneyTime, longArrowSydney, smallArrowSydney);
+            }
+        };
+        clocksTimer.scheduleAtFixedRate(clocksTimerTask,0,1000);
+    }
+
+    private void synchronizeClock(LocalTime localTime, ImageView minutesArrow, ImageView hoursArrow ) {
+        int hours = Integer.parseInt(localTime.toString().substring(0,2));
+        int minutes = Integer.parseInt(localTime.toString().substring(3,5));
+        if(hours>=12) {
+         hours -= 12;
+        }
+        double hoursAngle = hours * 30 + minutes * 0.5;
+        double minutesAngle = minutes * 6;
+
+        minutesArrow.rotateProperty().setValue(minutesAngle);
+        hoursArrow.rotateProperty().setValue(hoursAngle);
     }
 
     @FXML
@@ -70,6 +117,7 @@ public class timerStageController implements Initializable {
             startCountDownText.setVisible(true);
             stopCountDownText.setVisible(false);
             resumeCountDownText.setVisible(false);
+            validationCountDownText.setVisible(false);
             countDownMillis = 0;
             countDownMinutesField.setText("");
             countDownSecondsField.setText("");
@@ -77,7 +125,6 @@ public class timerStageController implements Initializable {
             countDownSecondsField.setDisable(false);
             countDownMinutesField.setEffect(null);
             countDownSecondsField.setEffect(null);
-            validationCountDownText.setVisible(false);
 
             if (isCountDownOn) {
                 isCountDownOn = false;
