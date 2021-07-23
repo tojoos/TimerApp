@@ -7,6 +7,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
@@ -15,6 +17,7 @@ import java.time.Instant;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -24,6 +27,7 @@ public class timerStageController implements Initializable {
     private Timer stopWatchTimer, countDownTimer, clocksTimer;
     private TimerTask stopWatchTimerTask, countDownTimerTask, clocksTimerTask;
     private int countDownMillis, stopWatchMillis;
+    private MediaPlayer alarmPlayer;
 
     @FXML
     private ImageView longArrowMainCity, smallArrowMainCity, longArrowTokyo, smallArrowTokyo,
@@ -104,6 +108,8 @@ public class timerStageController implements Initializable {
                 stopCountDownTimer();
                 stopCountDownText.setVisible(false);
                 resumeCountDownText.setVisible(true);
+                if(countDownMillis==0)
+                    alarmPlayer.stop();
             }
             isCountDownOn = !isCountDownOn;
         }
@@ -142,12 +148,21 @@ public class timerStageController implements Initializable {
                 } else {
                     countDownMillis = 0;
                     stopCountDownTimer();
+                    playAlarmSound();
                 }
                 updateCountDownText(countDownMillis);
             }
         };
         countDownTimer.scheduleAtFixedRate(countDownTimerTask, 0, 1000);
     }
+
+    private void playAlarmSound() {
+        if(countDownMillis==0) {
+            alarmPlayer = new MediaPlayer(new Media(Objects.requireNonNull(timerStageController.class.getResource("sounds\\alarm_sound.mp3")).toString()));
+            alarmPlayer.play();
+        }
+    }
+
 
     private void updateCountDownText(int countDownMillis) {
         String seconds = String.valueOf((int) Math.floor((float) countDownMillis /1000) % 60);
